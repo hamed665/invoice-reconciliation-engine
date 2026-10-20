@@ -1,0 +1,33 @@
+{
+  "invoices": [
+    {
+      "invoice": "INV-1",
+      "status": "matched",
+      "payment": "PAY-1"
+    },
+    {
+      "invoice": "INV-2",
+      "status": "ambiguous",
+      "candidates": [
+        "PAY-2",
+        "PAY-3"
+      ]
+    },
+    {
+      "invoice": "INV-3",
+      "status": "unmatched",
+      "candidates": []
+    }
+  ],
+  "unallocated_payments": [
+    "PAY-2",
+    "PAY-3"
+  ],
+  "settled_totals": [
+    {
+      "tenant": "synthetic-a",
+      "currency": "OMR",
+      "amount": "12.345"
+    }
+  ]
+}
