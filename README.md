@@ -1,11 +1,15 @@
 # Invoice Reconciliation Engine
 
+### A Hamed Minaei engineering project
+
 ![Verify](https://github.com/hamed665/invoice-reconciliation-engine/actions/workflows/verify.yml/badge.svg)
 
 A conservative invoice/payment reconciliation engine that matches only unique evidence and holds ambiguous settlements for review.
 
 **Status:** tested reference implementation with a reproducible synthetic CLI demo.
-Built as an independent engineering portfolio project by [Hamed Minaei](https://github.com/hamed665).
+**Project owner & maintainer:** [Hamed Minaei](https://github.com/hamed665)  
+**Engineering focus:** Conservative financial matching  
+**License:** MIT · Copyright © 2026 Hamed Minaei
 
 ## Features
 
@@ -75,6 +79,13 @@ All bundled records are synthetic. This program reads JSON and prints decisions;
 ## Limitations
 
 No partial payments, refunds, FX, fees, bank connector, fuzzy matching or ledger writes. Identical mistaken records on both sides can still match: reconcile against trusted source data. A unique exact match is evidence, not authorization to pay. The in-memory quadratic candidate graph is intended for bounded batches, not large bank statements. Read input files only from trusted/local paths; the CLI does not enforce a file-byte cap.
+
+## Maintainer
+
+[Hamed Minaei](https://github.com/hamed665) owns and maintains this portfolio repository.
+For implementation details, review the source, behavioral tests and merged pull requests.
+See [AUTHORS.md](AUTHORS.md) for development attribution and [ENGINEERING.md](ENGINEERING.md)
+for a concise technical walkthrough.
 
 ## Attribution and ownership
 
