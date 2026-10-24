@@ -1,7 +1,7 @@
 name: reconcile-desk
 services:
   app:
-    image: reconcile-desk:831f88f
+    image: reconcile-desk:460cde6
     restart: unless-stopped
     environment:
       HOST: 0.0.0.0
