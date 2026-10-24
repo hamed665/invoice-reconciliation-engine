@@ -27,6 +27,16 @@
 - Existing Caddy configuration SHA-256 unchanged: `433fbf6d14ab895f911432e58c28f2e169ccee364818712fbb9f4a363b3bcdfc`.
 - Public DNS and Caddy routing were not changed. The container is internal only.
 
+## Hardened release deployment follow-up
+
+- Code commit `460cde601b12066a5392b9b3078286a1c33d73d0` built as `reconcile-desk:460cde6` and deployed by recreating only the isolated app container.
+- HTTP served the resolved sample-only widget; the real MCP smoke passed again inside this image.
+- Almaha and Inbox both returned HTTP 200 afterwards; existing Caddy SHA-256 remained unchanged.
+- GitHub Actions for that code commit: `Verify` and `Reconcile Desk plugin` both completed successfully.
+- A full-size local engine check with 200 invoices and 200 payments matched all 200 uniquely, total OMR 2469.000. This is not evidence of public network latency.
+- Prepared a separate pending Caddyfile and rollback notes on the VPS; Caddy validation passed. This candidate was not applied.
+- Cloudflare Google sign-in returned “Unable to sign in. Try again or use your email and password.” No DNS change or public activation occurred.
+
 ## Not yet executed or established
 
 - Browser visual and interaction verification. The available cloud browser refused the local file test URL; no screenshot or successful visual check is claimed.
