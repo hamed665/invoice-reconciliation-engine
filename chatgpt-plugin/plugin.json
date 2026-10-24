@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "reconcile-desk",
+  "version": "0.1.0",
+  "description": "Inspect exact invoice/payment matches, explain ambiguity holds and export a review report. Public mode uses fictional sample records only.",
+  "author": {"name": "Hamed Minaei", "url": "https://github.com/hamed665"},
+  "repository": "https://github.com/hamed665/invoice-reconciliation-engine",
+  "license": "MIT",
+  "keywords": ["reconciliation", "invoices", "MCP", "accounting-workflow"]
+}

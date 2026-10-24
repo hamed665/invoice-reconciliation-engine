@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "max_days": 45,
+  "summary": {
+    "invoices": 3,
+    "payments": 3,
+    "matched": 1,
+    "ambiguous": 1,
+    "unmatched": 1,
+    "unallocated_payments": 2
+  },
+  "rows": [
+    {
+      "invoice_id": "INV-1",
+      "tenant": "synthetic-a",
+      "currency": "OMR",
+      "amount": "12.345",
+      "reference": "OM-101",
+      "date": "2026-01-01",
+      "status": "matched",
+      "payment_id": "PAY-1",
+      "candidate_payments": [
+        {
+          "id": "PAY-1",
+          "date": "2026-01-03",
+          "amount": "12.345"
+        }
+      ],
+      "reason": "Unique one-to-one match on tenant, normalized reference, currency, exact amount and date window."
+    },
+    {
+      "invoice_id": "INV-2",
+      "tenant": "synthetic-a",
+      "currency": "USD",
+      "amount": "85.00",
+      "reference": "US-202",
+      "date": "2026-01-01",
+      "status": "ambiguous",
+      "payment_id": null,
+      "candidate_payments": [
+        {
+          "id": "PAY-2",
+          "date": "2026-01-02",
+          "amount": "85.00"
+        },
+        {
+          "id": "PAY-3",
+          "date": "2026-01-03",
+          "amount": "85.00"
+        }
+      ],
+      "reason": "Multiple candidate links compete for an invoice or payment. No allocation was made; human review is required."
+    },
+    {
+      "invoice_id": "INV-3",
+      "tenant": "synthetic-a",
+      "currency": "OMR",
+      "amount": "20.000",
+      "reference": "OM-303",
+      "date": "2026-01-01",
+      "status": "unmatched",
+      "payment_id": null,
+      "candidate_payments": [],
+      "reason": "No payment satisfies every matching rule within the selected date window."
+    }
+  ],
+  "matched_totals": [
+    {
+      "tenant": "synthetic-a",
+      "currency": "OMR",
+      "amount": "12.345"
+    }
+  ],
+  "unallocated_payment_ids": [
+    "PAY-2",
+    "PAY-3"
+  ],
+  "csv_export": "invoice_id,tenant,currency,amount,reference,date,status,payment_id,candidate_payment_ids,reason\nINV-1,synthetic-a,OMR,12.345,OM-101,2026-01-01,matched,PAY-1,PAY-1,\"Unique one-to-one match on tenant, normalized reference, currency, exact amount and date window.\"\nINV-2,synthetic-a,USD,85.00,US-202,2026-01-01,ambiguous,,PAY-2; PAY-3,Multiple candidate links compete for an invoice or payment. No allocation was made; human review is required.\nINV-3,synthetic-a,OMR,20.000,OM-303,2026-01-01,unmatched,,,No payment satisfies every matching rule within the selected date window.\n",
+  "notice": "Matching evidence only. No money is moved, no ledger is changed, and ambiguous items require human review.",
+  "synthetic_demo": true
+}

@@ -1,0 +1,13 @@
+{
+  "invoices": [
+    {"id":"INV-1","tenant":"synthetic-a","currency":"OMR","reference":"OM-101","amount":"12.345","date":"2026-01-01"},
+    {"id":"INV-2","tenant":"synthetic-a","currency":"USD","reference":"US-202","amount":"85.00","date":"2026-01-01"},
+    {"id":"INV-3","tenant":"synthetic-a","currency":"OMR","reference":"OM-303","amount":"20.000","date":"2026-01-01"}
+  ],
+  "payments": [
+    {"id":"PAY-1","tenant":"synthetic-a","currency":"OMR","reference":"om / 101","amount":"12.345","date":"2026-01-03"},
+    {"id":"PAY-2","tenant":"synthetic-a","currency":"USD","reference":"US-202","amount":"85.00","date":"2026-01-02"},
+    {"id":"PAY-3","tenant":"synthetic-a","currency":"USD","reference":"US-202","amount":"85.00","date":"2026-01-03"}
+  ]
+}
+
