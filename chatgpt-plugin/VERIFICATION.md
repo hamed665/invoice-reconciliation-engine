@@ -3,10 +3,19 @@
 ## Executed locally
 
 - Python 3.12, MCP SDK 2.3.0, Uvicorn 0.54.0.
-- `pytest -q`: 38 passing tests. Covers exact matches, shared-payment ambiguity, every matching constraint, currency precision, invalid money, duplicate IDs, quoted CSV/BOM, malformed/oversized input, date-window validation, formula-safe exports, statelessness, HTTP handling, sample-only protection and private local CSV execution.
+- `pytest -q`: 43 passing tests. Covers exact matches, shared-payment ambiguity, every matching constraint, currency precision, invalid money, duplicate IDs, quoted CSV/BOM, malformed/oversized input, date-window validation, formula-safe exports, statelessness, HTTP handling, sample-only protection and private local CSV execution.
 - `python verify_mcp.py`: passed against a real child server over loopback HTTP. MCP initialization, tool enumeration, sample calculation, UI resource MIME/content and denied custom data in sample-only mode verified.
 - JavaScript syntax check with Node.js 24: passed.
 - Sample result: 3 invoices / 3 payments; 1 matched, 1 ambiguity hold, 1 unmatched, 2 unallocated payments. Matched total: OMR 12.345.
+
+## UI and input hardening follow-up
+
+- Public UI hides unsupported CSV upload controls; private local mode retains them.
+- Added selected-row feedback, keyboard focus styling, scroll-region label, processing/completion/error announcements and unallocated-payment count.
+- Malformed quoted CSV headers and dates outside YYYY-MM-DD return validation errors.
+- Standalone UI sends a restrictive Content-Security-Policy; no third-party fonts, scripts or trackers.
+- Re-ran all 43 tests, JavaScript syntax check and real local MCP smoke after these changes.
+- Visual browser, responsive viewport and real ChatGPT embedded bridge/download checks remain pending; these changes are not evidence of those checks.
 
 ## Executed on the existing VPS
 

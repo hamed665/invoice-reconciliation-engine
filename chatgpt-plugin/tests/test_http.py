@@ -25,3 +25,11 @@ def test_hosted_demo_refuses_private_uploads(client):
 def test_mcp_rejects_bad_host(client):
     r=client.post('/mcp',headers={'host':'attacker.invalid','content-type':'application/json'},json={})
     assert r.status_code==421
+
+
+def test_public_widget_has_resolved_mode_and_security_policy(client):
+    r=client.get('/')
+    assert 'const demoOnly=true;' in r.text
+    assert '__DEMO_ONLY__' not in r.text
+    assert "base-uri 'none'" in r.headers['content-security-policy']
+    assert r.headers['x-content-type-options']=='nosniff'

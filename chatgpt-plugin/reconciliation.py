@@ -2,6 +2,7 @@
 import csv
 import io
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from core import reconcile
@@ -16,7 +17,11 @@ def parse_csv(text, label):
     if '\x00' in text:
         raise ValueError(f'{label}: null bytes are not supported')
     reader = csv.DictReader(io.StringIO(text.lstrip('\ufeff')), strict=True)
-    if reader.fieldnames is None or len(reader.fieldnames) != len(set(reader.fieldnames)):
+    try:
+        headers = reader.fieldnames
+    except csv.Error as exc:
+        raise ValueError(f'{label}: malformed CSV header') from exc
+    if headers is None or len(reader.fieldnames) != len(set(reader.fieldnames)):
         raise ValueError(f'{label}: missing or duplicate column headers')
     if set(reader.fieldnames) != set(FIELDS):
         raise ValueError(f'{label}: required columns are {", ".join(FIELDS)}')
@@ -30,6 +35,8 @@ def parse_csv(text, label):
             cleaned = {k: v.strip() for k, v in row.items()}
             if any(not v or len(v) > 160 for v in cleaned.values()):
                 raise ValueError(f'{label}: every cell must contain 1–160 characters')
+            if not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', cleaned['date']):
+                raise ValueError(f'{label}: dates must use YYYY-MM-DD')
             result.append(cleaned)
     except csv.Error as exc:
         raise ValueError(f'{label}: malformed CSV') from exc

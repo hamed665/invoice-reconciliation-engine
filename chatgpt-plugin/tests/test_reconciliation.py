@@ -72,3 +72,14 @@ def test_stateless_no_input_mutation():
     d=fixtures();before=json.dumps(d,sort_keys=True)
     assert compute(d)==compute(d)
     assert json.dumps(d,sort_keys=True)==before
+
+
+def test_unterminated_quoted_header_is_a_validation_error():
+    with pytest.raises(ValueError, match='malformed CSV header'):
+        parse_csv('"id,tenant,currency,reference,amount,date', 'Invoices')
+
+@pytest.mark.parametrize('value', ['20260101', '2026-W01-1', '2026-1-01'])
+def test_dates_require_documented_iso_calendar_format(value):
+    d=fixtures();d['invoices'][0]['date']=value
+    with pytest.raises(ValueError, match='YYYY-MM-DD'):
+        compute(d)
