@@ -8,12 +8,21 @@
 - JavaScript syntax check with Node.js 24: passed.
 - Sample result: 3 invoices / 3 payments; 1 matched, 1 ambiguity hold, 1 unmatched, 2 unallocated payments. Matched total: OMR 12.345.
 
+## Executed on the existing VPS
+
+- Docker image `reconcile-desk:831f88f` built and started on the authorized VPS.
+- Container health: healthy. No published host ports; dedicated internal network, no application/database network attachment.
+- Runtime limits: 0.25 CPU, 192 MiB RAM, 64 PIDs, read-only root filesystem and dropped Linux capabilities.
+- Real Streamable HTTP MCP smoke executed inside the container: tool enumeration, sample reconciliation, UI resource and sample-only upload protection passed.
+- Existing Almaha website and Inbox returned HTTP 200 after deployment.
+- Existing Caddy configuration SHA-256 unchanged: `433fbf6d14ab895f911432e58c28f2e169ccee364818712fbb9f4a363b3bcdfc`.
+- Public DNS and Caddy routing were not changed. The container is internal only.
+
 ## Not yet executed or established
 
 - Browser visual and interaction verification. The available cloud browser refused the local file test URL; no screenshot or successful visual check is claimed.
 - Live ChatGPT installation and embedded component bridge/download behavior.
 - Hosted HTTPS endpoint. Railway's connector returned reauthentication required before any resource was created.
-- Docker image build and runtime verification.
 - Public plugin submission, organization verification and review approval.
 - Remote authentication or production financial-data processing.
 
